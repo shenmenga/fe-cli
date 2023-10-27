@@ -3,8 +3,9 @@ import { Args, Command, Flags } from '@oclif/core';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 import { select } from '@inquirer/prompts';
+import chalk from 'chalk';
 import ora from 'ora';
-
+const downloadGitRepo = require('download-git-repo');
 // 框架列表
 const frameworkList = [
     { name: 'vue3+elementPlus', value: 'eleplus' },
@@ -41,14 +42,17 @@ export default class Create extends Command {
         return _res;
     }
 
-    // 下载项目
+    // 下载代码，根据type获取对应的目录
     // download-git-repo
     async download_project(type: string) {
         this.loading.start('downloading...');
-        setTimeout(() => {
-            this.loading.succeed(`download success`);
-        }, 2000);
-        // 下载代码，根据type获取对应的目录
+        downloadGitRepo('git@codeup.aliyun.com:qimao/front/vue-project.git', 'template', { clone: true }, (err: any) => {
+            if (err) {
+                this.loading.fail(chalk.red(`download fail`));
+            } else {
+                this.loading.succeed(chalk.blue(`download success`));
+            }
+        });
     }
 
     async run(): Promise<void> {
