@@ -5,6 +5,7 @@ import * as fs from 'node:fs';
 import { select } from '@inquirer/prompts';
 import chalk from 'chalk';
 import ora from 'ora';
+const fse = require('fs-extra');
 const downloadGitRepo = require('download-git-repo');
 // 框架列表
 const frameworkList = [
@@ -13,7 +14,7 @@ const frameworkList = [
     { name: 'uniapp', value: 'uniapp' },
     { name: 'nuxt3', value: 'nuxt3' },
     { name: 'nuxt2', value: 'nuxt2' },
-    { name: 'vue2', value: 'vue2' }
+    { name: 'vue2', value: 'vue2' },
 ];
 
 export default class Create extends Command {
@@ -25,7 +26,7 @@ export default class Create extends Command {
     // 非必填参数
     static flags = {
         help: Flags.help({ char: 'h' }),
-        framework: Flags.string({ char: 'f', description: '指定框架' })
+        framework: Flags.string({ char: 'f', description: '指定框架' }),
     };
 
     // 必填参数
@@ -33,11 +34,16 @@ export default class Create extends Command {
 
     loading = ora();
 
+    cwd = process.cwd();
+
+    // TODO: default-dir 用户输入的项目名称
+    root = path.join(this.cwd, 'default-dir');
+
     // 选择初始化框架
     async choose_framework() {
         const _res = await select({
             message: '选择技术栈和框架',
-            choices: frameworkList
+            choices: frameworkList,
         });
         return _res;
     }
@@ -55,12 +61,18 @@ export default class Create extends Command {
         });
     }
 
+    async download_template(type: string) {
+        const _src = path.join(__dirname, `templates/${type}`);
+        this.log(`--- ${__dirname} -- ${_src}`);
+        fse.copySync(_src, this.root);
+    }
+
     async run(): Promise<void> {
         const { flags } = await this.parse(Create);
         let _framework = flags.framework;
         if (!_framework) {
             _framework = await this.choose_framework();
         }
-        await this.download_project(_framework);
+        await this.download_template(_framework);
     }
 }
