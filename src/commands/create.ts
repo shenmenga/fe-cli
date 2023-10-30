@@ -14,7 +14,7 @@ const frameworkList = [
     { name: 'uniapp', value: 'uniapp' },
     { name: 'nuxt3', value: 'nuxt3' },
     { name: 'nuxt2', value: 'nuxt2' },
-    { name: 'vue2', value: 'vue2' },
+    { name: 'vue2', value: 'vue2' }
 ];
 
 export default class Create extends Command {
@@ -26,7 +26,7 @@ export default class Create extends Command {
     // 非必填参数
     static flags = {
         help: Flags.help({ char: 'h' }),
-        framework: Flags.string({ char: 'f', description: '指定框架' }),
+        framework: Flags.string({ char: 'f', description: '指定框架' })
     };
 
     // 必填参数
@@ -36,14 +36,11 @@ export default class Create extends Command {
 
     cwd = process.cwd();
 
-    // TODO: default-dir 用户输入的项目名称
-    root = path.join(this.cwd, 'default-dir');
-
     // 选择初始化框架
     async choose_framework() {
         const _res = await select({
             message: '选择技术栈和框架',
-            choices: frameworkList,
+            choices: frameworkList
         });
         return _res;
     }
@@ -61,10 +58,12 @@ export default class Create extends Command {
         });
     }
 
-    async download_template(type: string) {
-        const _src = path.join(__dirname, `templates/${type}`);
-        this.log(`--- ${__dirname} -- ${_src}`);
-        fse.copySync(_src, this.root);
+    async download_template(root: string, type: string) {
+        this.loading.start('downloading...');
+        const _src = path.join(__dirname, `../templates/${type}`);
+        this.log(`--- ${__dirname} -- ${root}`);
+        fse.copySync(_src, root);
+        this.loading.succeed(chalk.blue(`download success`));
     }
 
     async run(): Promise<void> {
@@ -73,6 +72,7 @@ export default class Create extends Command {
         if (!_framework) {
             _framework = await this.choose_framework();
         }
-        await this.download_template(_framework);
+        const _root = path.join(this.cwd, _framework);
+        await this.download_template(_root, _framework);
     }
 }

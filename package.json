@@ -63,7 +63,7 @@
         }
     },
     "scripts": {
-        "build": "shx rm -rf dist && tsc -b",
+        "build": " shx rm -rf dist  && tsc -b && cp -r ./templates ./dist/templates",
         "lint": "eslint . --ext .ts",
         "postpack": "shx rm -f oclif.manifest.json",
         "posttest": "npm run lint",
