@@ -18,7 +18,7 @@ $ npm install -g qm-fe-cli
 $ fe-cli COMMAND
 running command...
 $ fe-cli (--version)
-qm-fe-cli/1.0.4 darwin-x64 node-v16.16.0
+qm-fe-cli/1.1.0 darwin-x64 node-v16.16.0
 $ fe-cli --help [COMMAND]
 USAGE
   $ fe-cli COMMAND
@@ -27,6 +27,9 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`fe-cli build PERSON`](#fe-cli-build-person)
+* [`fe-cli build world`](#fe-cli-build-world)
+* [`fe-cli create [NAME]`](#fe-cli-create-name)
 * [`fe-cli help [COMMANDS]`](#fe-cli-help-commands)
 * [`fe-cli plugins`](#fe-cli-plugins)
 * [`fe-cli plugins:install PLUGIN...`](#fe-cli-pluginsinstall-plugin)
@@ -37,6 +40,75 @@ USAGE
 * [`fe-cli plugins:uninstall PLUGIN...`](#fe-cli-pluginsuninstall-plugin-1)
 * [`fe-cli plugins:uninstall PLUGIN...`](#fe-cli-pluginsuninstall-plugin-2)
 * [`fe-cli plugins update`](#fe-cli-plugins-update)
+* [`fe-cli publish PERSON`](#fe-cli-publish-person)
+
+## `fe-cli build PERSON`
+
+build project and auto publish code to server
+
+```
+USAGE
+  $ fe-cli build PERSON [-h] [--ip] [--dir]
+
+ARGUMENTS
+  PERSON  Person to say hello to
+
+FLAGS
+  -h, --help  Show CLI help.
+  --dir       打包目录名称，默认同package.josn name
+  --ip        服务器ip
+
+DESCRIPTION
+  build project and auto publish code to server
+
+EXAMPLES
+  qm build --ip=
+
+  qm build --dir=
+```
+
+_See code: [src/commands/build/index.ts](https://github.com/code/fe-cli/blob/v1.1.0/src/commands/build/index.ts)_
+
+## `fe-cli build world`
+
+Say hello world
+
+```
+USAGE
+  $ fe-cli build world
+
+DESCRIPTION
+  Say hello world
+
+EXAMPLES
+  $ fe-cli build world
+  hello world! (./src/commands/hello/world.ts)
+```
+
+_See code: [src/commands/build/world.ts](https://github.com/code/fe-cli/blob/v1.1.0/src/commands/build/world.ts)_
+
+## `fe-cli create [NAME]`
+
+初始化项目
+
+```
+USAGE
+  $ fe-cli create [NAME] [-h]
+
+ARGUMENTS
+  NAME  create project name
+
+FLAGS
+  -h, --help  Show CLI help.
+
+DESCRIPTION
+  初始化项目
+
+EXAMPLES
+  fe create project-name
+```
+
+_See code: [src/commands/create.ts](https://github.com/code/fe-cli/blob/v1.1.0/src/commands/create.ts)_
 
 ## `fe-cli help [COMMANDS]`
 
@@ -304,4 +376,27 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v3.9.4/src/commands/plugins/update.ts)_
+
+## `fe-cli publish PERSON`
+
+publish project to npm ,
+
+```
+USAGE
+  $ fe-cli publish PERSON [-h]
+
+ARGUMENTS
+  PERSON  Person to say hello to
+
+FLAGS
+  -h, --help  Show CLI help.
+
+DESCRIPTION
+  publish project to npm ,
+
+EXAMPLES
+  fe publish
+```
+
+_See code: [src/commands/publish/index.ts](https://github.com/code/fe-cli/blob/v1.1.0/src/commands/publish/index.ts)_
 <!-- commandsstop -->
