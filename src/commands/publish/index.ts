@@ -27,9 +27,11 @@ export default class Publish extends Command {
         const currentGitName = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
         console.log('-- currentGitName', currentGitName);
         if (currentGitName !== 'master') {
-            // execSync('npm publish --tag=beta');
-            const output = execSync('ls -l');
-            console.log(output.toString());
+            execSync('npm version prerelease --preid beta');
+            execSync('npm publish --tag beta');
+            execSync('git add .');
+            execSync('git commit -a "发布新测试版本"');
+            execSync('git push origin');
         } else {
             const output = execSync('ls -l');
             console.log(output.toString());
