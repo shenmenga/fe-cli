@@ -38,7 +38,9 @@ export default class Publish extends Command {
                 message: '选择升级的版本',
                 choices: publishVerisonList,
             });
-            execSync(`npm version ${version}`);
+            const newVersion = execSync(`npm version ${version}`).toString();
+            console.log(11, newVersion);
+            return;
             execSync('npm publish');
             // execSync('npm version prerelease --preid beta');
             // execSync('npm publish --tag beta');
