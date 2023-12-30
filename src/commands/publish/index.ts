@@ -34,20 +34,19 @@ export default class Publish extends Command {
         const currentGitName = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
         console.log('-- currentGitName', currentGitName);
         if (currentGitName !== 'master') {
+            const res = execSync('npm version prerelease --preid beta').toString();
+            console.log(11, res);
+            return;
+            execSync('npm publish --tag beta');
+            execSync('git add .');
+            execSync(`git commit -m "feat: auto upgrade beta version"`);
+            execSync('git push origin');
+        } else {
             const version = await select({
                 message: '选择升级的版本',
                 choices: publishVerisonList,
             });
-            const newVersion = execSync(`npm version ${version}`).toString();
-            console.log(11, newVersion);
-            return;
-            execSync('npm publish');
-            // execSync('npm version prerelease --preid beta');
-            // execSync('npm publish --tag beta');
-            execSync('git add .');
-            execSync(`git commit -m "feat: auto upgrade ${version} version"`);
-            execSync('git push origin');
-        } else {
+            execSync(`npm version ${version}`);
         }
     }
 
