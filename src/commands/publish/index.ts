@@ -29,7 +29,7 @@ export default class Publish extends Command {
         person: Args.string({ description: 'Person to say hello to', required: true }),
     };
 
-    async init() {
+    async load() {
         // 获取当前git分支
         const currentGitName = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
         if (currentGitName !== 'master') {
@@ -49,7 +49,7 @@ export default class Publish extends Command {
     }
 
     async run(): Promise<void> {
-        await this.init();
+        this.load();
         // const { args, flags } = await this.parse(Publish);
     }
 }
