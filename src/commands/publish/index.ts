@@ -3,12 +3,19 @@ import { Args, Command, Flags } from '@oclif/core';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 import { execSync } from 'node:child_process';
+import { select } from '@inquirer/prompts';
 
 /**
  * 发布npm包
  * 1. 若为master分支打包正式版本
  * 2. 其他打包为测试版本
  */
+
+const publishVerisonList = [
+    { name: 'major', value: 'major' },
+    { name: 'minor', value: 'minor' },
+    { name: 'patch', value: 'patch' },
+];
 export default class Publish extends Command {
     static description = 'publish project to npm , ';
 
@@ -27,21 +34,23 @@ export default class Publish extends Command {
         const currentGitName = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
         console.log('-- currentGitName', currentGitName);
         if (currentGitName !== 'master') {
-            execSync('npm version prerelease --preid beta');
-            execSync('npm publish --tag beta');
+            const version = await select({
+                message: '选择升级的版本',
+                choices: publishVerisonList,
+            });
+            execSync(`npm version ${version}`);
+            execSync('npm publish');
+            // execSync('npm version prerelease --preid beta');
+            // execSync('npm publish --tag beta');
             execSync('git add .');
-            execSync('git commit -a "发布新测试版本"');
+            execSync(`git commit -m "feat: auto upgrade ${version} version"`);
             execSync('git push origin');
         } else {
-            const output = execSync('ls -l');
-            console.log(output.toString());
         }
     }
 
     async run(): Promise<void> {
         await this.init();
-        const { args, flags } = await this.parse(Publish);
-
-        this.log(`publish ${args.person} from ${flags.from}! (./src/commands/hello/index.ts)`);
+        // const { args, flags } = await this.parse(Publish);
     }
 }
