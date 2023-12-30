@@ -1,6 +1,6 @@
 {
-    "name": "fe-cli",
-    "version": "0.0.1",
+    "name": "qm-fe-cli",
+    "version": "1.0.2-beta.1",
     "description": "front-end cli",
     "author": "shenmeng@qimao.com",
     "bin": {
@@ -22,6 +22,7 @@
         "@oclif/plugin-help": "^5",
         "@oclif/plugin-plugins": "^3.9.1",
         "eslint-config-prettier": "^9.0.0",
+        "fs-extra": "^11.1.1",
         "ora": "^5.4.1"
     },
     "devDependencies": {
@@ -34,6 +35,7 @@
         "@typescript-eslint/eslint-plugin": "^6.9.0",
         "@typescript-eslint/parser": "^6.9.0",
         "chai": "^4",
+        "chalk": "^4.1.2",
         "download-git-repo": "^3.0.2",
         "eslint": "^8.51.0",
         "eslint-config-oclif": "^5",
@@ -61,11 +63,10 @@
         }
     },
     "scripts": {
-        "build": "shx rm -rf dist && tsc -b",
+        "build": " shx rm -rf dist  && tsc -b -w && cp -r ./templates ./dist/templates",
         "lint": "eslint . --ext .ts",
         "postpack": "shx rm -f oclif.manifest.json",
         "posttest": "npm run lint",
-        "prepack": "npm run build && oclif manifest && oclif readme",
         "test": "mocha --forbid-only \"test/**/*.test.ts\"",
         "version": "oclif readme && git add README.md",
         "prettier": "prettier --write 'src/**/*.ts'"

@@ -14,79 +14,109 @@ oclif example Hello World CLI
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g qm-cli
-$ qm COMMAND
+$ npm install -g qm-fe-cli
+$ fe-cli COMMAND
 running command...
-$ qm (--version)
-qm-cli/0.0.0 darwin-arm64 node-v16.17.1
-$ qm --help [COMMAND]
+$ fe-cli (--version)
+qm-fe-cli/1.0.2-beta.1 darwin-x64 node-v16.16.0
+$ fe-cli --help [COMMAND]
 USAGE
-  $ qm COMMAND
+  $ fe-cli COMMAND
 ...
 ```
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`qm hello PERSON`](#qm-hello-person)
-* [`qm hello world`](#qm-hello-world)
-* [`qm help [COMMANDS]`](#qm-help-commands)
-* [`qm plugins`](#qm-plugins)
-* [`qm plugins:install PLUGIN...`](#qm-pluginsinstall-plugin)
-* [`qm plugins:inspect PLUGIN...`](#qm-pluginsinspect-plugin)
-* [`qm plugins:install PLUGIN...`](#qm-pluginsinstall-plugin-1)
-* [`qm plugins:link PLUGIN`](#qm-pluginslink-plugin)
-* [`qm plugins:uninstall PLUGIN...`](#qm-pluginsuninstall-plugin)
-* [`qm plugins:uninstall PLUGIN...`](#qm-pluginsuninstall-plugin-1)
-* [`qm plugins:uninstall PLUGIN...`](#qm-pluginsuninstall-plugin-2)
-* [`qm plugins update`](#qm-plugins-update)
+* [`fe-cli build PERSON`](#fe-cli-build-person)
+* [`fe-cli build world`](#fe-cli-build-world)
+* [`fe-cli create [NAME]`](#fe-cli-create-name)
+* [`fe-cli help [COMMANDS]`](#fe-cli-help-commands)
+* [`fe-cli plugins`](#fe-cli-plugins)
+* [`fe-cli plugins:install PLUGIN...`](#fe-cli-pluginsinstall-plugin)
+* [`fe-cli plugins:inspect PLUGIN...`](#fe-cli-pluginsinspect-plugin)
+* [`fe-cli plugins:install PLUGIN...`](#fe-cli-pluginsinstall-plugin-1)
+* [`fe-cli plugins:link PLUGIN`](#fe-cli-pluginslink-plugin)
+* [`fe-cli plugins:uninstall PLUGIN...`](#fe-cli-pluginsuninstall-plugin)
+* [`fe-cli plugins:uninstall PLUGIN...`](#fe-cli-pluginsuninstall-plugin-1)
+* [`fe-cli plugins:uninstall PLUGIN...`](#fe-cli-pluginsuninstall-plugin-2)
+* [`fe-cli plugins update`](#fe-cli-plugins-update)
+* [`fe-cli publish PERSON`](#fe-cli-publish-person)
 
-## `qm hello PERSON`
+## `fe-cli build PERSON`
 
-Say hello
+build project and auto publish code to server
 
 ```
 USAGE
-  $ qm hello PERSON -f <value>
+  $ fe-cli build PERSON [-h] [--ip] [--dir]
 
 ARGUMENTS
   PERSON  Person to say hello to
 
 FLAGS
-  -f, --from=<value>  (required) Who is saying hello
+  -h, --help  Show CLI help.
+  --dir       打包目录名称，默认同package.josn name
+  --ip        服务器ip
 
 DESCRIPTION
-  Say hello
+  build project and auto publish code to server
 
 EXAMPLES
-  $ oex hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
+  qm build --ip=
+
+  qm build --dir=
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/projj/qm-cli/blob/v0.0.0/dist/commands/hello/index.ts)_
+_See code: [src/commands/build/index.ts](https://github.com/code/fe-cli/blob/v1.0.2-beta.1/src/commands/build/index.ts)_
 
-## `qm hello world`
+## `fe-cli build world`
 
 Say hello world
 
 ```
 USAGE
-  $ qm hello world
+  $ fe-cli build world
 
 DESCRIPTION
   Say hello world
 
 EXAMPLES
-  $ qm hello world
+  $ fe-cli build world
   hello world! (./src/commands/hello/world.ts)
 ```
 
-## `qm help [COMMANDS]`
+_See code: [src/commands/build/world.ts](https://github.com/code/fe-cli/blob/v1.0.2-beta.1/src/commands/build/world.ts)_
 
-Display help for qm.
+## `fe-cli create [NAME]`
+
+初始化项目
 
 ```
 USAGE
-  $ qm help [COMMANDS] [-n]
+  $ fe-cli create [NAME] [-h]
+
+ARGUMENTS
+  NAME  create project name
+
+FLAGS
+  -h, --help  Show CLI help.
+
+DESCRIPTION
+  初始化项目
+
+EXAMPLES
+  fe create project-name
+```
+
+_See code: [src/commands/create.ts](https://github.com/code/fe-cli/blob/v1.0.2-beta.1/src/commands/create.ts)_
+
+## `fe-cli help [COMMANDS]`
+
+Display help for fe-cli.
+
+```
+USAGE
+  $ fe-cli help [COMMANDS] [-n]
 
 ARGUMENTS
   COMMANDS  Command to show help for.
@@ -95,38 +125,41 @@ FLAGS
   -n, --nested-commands  Include all nested commands in the output.
 
 DESCRIPTION
-  Display help for qm.
+  Display help for fe-cli.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.2.10/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.2.20/src/commands/help.ts)_
 
-## `qm plugins`
+## `fe-cli plugins`
 
 List installed plugins.
 
 ```
 USAGE
-  $ qm plugins [--core]
+  $ fe-cli plugins [--json] [--core]
 
 FLAGS
   --core  Show core plugins.
+
+GLOBAL FLAGS
+  --json  Format output as json.
 
 DESCRIPTION
   List installed plugins.
 
 EXAMPLES
-  $ qm plugins
+  $ fe-cli plugins
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.4.7/src/commands/plugins/index.ts)_
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v3.9.4/src/commands/plugins/index.ts)_
 
-## `qm plugins:install PLUGIN...`
+## `fe-cli plugins:install PLUGIN...`
 
 Installs a plugin into the CLI.
 
 ```
 USAGE
-  $ qm plugins:install PLUGIN...
+  $ fe-cli plugins:install PLUGIN...
 
 ARGUMENTS
   PLUGIN  Plugin to install.
@@ -148,23 +181,23 @@ DESCRIPTION
 
 
 ALIASES
-  $ qm plugins add
+  $ fe-cli plugins add
 
 EXAMPLES
-  $ qm plugins:install myplugin 
+  $ fe-cli plugins:install myplugin 
 
-  $ qm plugins:install https://github.com/someuser/someplugin
+  $ fe-cli plugins:install https://github.com/someuser/someplugin
 
-  $ qm plugins:install someuser/someplugin
+  $ fe-cli plugins:install someuser/someplugin
 ```
 
-## `qm plugins:inspect PLUGIN...`
+## `fe-cli plugins:inspect PLUGIN...`
 
 Displays installation properties of a plugin.
 
 ```
 USAGE
-  $ qm plugins:inspect PLUGIN...
+  $ fe-cli plugins:inspect PLUGIN...
 
 ARGUMENTS
   PLUGIN  [default: .] Plugin to inspect.
@@ -180,16 +213,18 @@ DESCRIPTION
   Displays installation properties of a plugin.
 
 EXAMPLES
-  $ qm plugins:inspect myplugin
+  $ fe-cli plugins:inspect myplugin
 ```
 
-## `qm plugins:install PLUGIN...`
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v3.9.4/src/commands/plugins/inspect.ts)_
+
+## `fe-cli plugins:install PLUGIN...`
 
 Installs a plugin into the CLI.
 
 ```
 USAGE
-  $ qm plugins:install PLUGIN...
+  $ fe-cli plugins:install PLUGIN...
 
 ARGUMENTS
   PLUGIN  Plugin to install.
@@ -211,30 +246,33 @@ DESCRIPTION
 
 
 ALIASES
-  $ qm plugins add
+  $ fe-cli plugins add
 
 EXAMPLES
-  $ qm plugins:install myplugin 
+  $ fe-cli plugins:install myplugin 
 
-  $ qm plugins:install https://github.com/someuser/someplugin
+  $ fe-cli plugins:install https://github.com/someuser/someplugin
 
-  $ qm plugins:install someuser/someplugin
+  $ fe-cli plugins:install someuser/someplugin
 ```
 
-## `qm plugins:link PLUGIN`
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v3.9.4/src/commands/plugins/install.ts)_
+
+## `fe-cli plugins:link PLUGIN`
 
 Links a plugin into the CLI for development.
 
 ```
 USAGE
-  $ qm plugins:link PLUGIN
+  $ fe-cli plugins:link PLUGIN
 
 ARGUMENTS
   PATH  [default: .] path to plugin
 
 FLAGS
-  -h, --help     Show CLI help.
+  -h, --help      Show CLI help.
   -v, --verbose
+  --[no-]install  Install dependencies after linking the plugin.
 
 DESCRIPTION
   Links a plugin into the CLI for development.
@@ -245,16 +283,18 @@ DESCRIPTION
 
 
 EXAMPLES
-  $ qm plugins:link myplugin
+  $ fe-cli plugins:link myplugin
 ```
 
-## `qm plugins:uninstall PLUGIN...`
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v3.9.4/src/commands/plugins/link.ts)_
+
+## `fe-cli plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ qm plugins:uninstall PLUGIN...
+  $ fe-cli plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -267,17 +307,17 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ qm plugins unlink
-  $ qm plugins remove
+  $ fe-cli plugins unlink
+  $ fe-cli plugins remove
 ```
 
-## `qm plugins:uninstall PLUGIN...`
+## `fe-cli plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ qm plugins:uninstall PLUGIN...
+  $ fe-cli plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -290,17 +330,19 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ qm plugins unlink
-  $ qm plugins remove
+  $ fe-cli plugins unlink
+  $ fe-cli plugins remove
 ```
 
-## `qm plugins:uninstall PLUGIN...`
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v3.9.4/src/commands/plugins/uninstall.ts)_
+
+## `fe-cli plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ qm plugins:uninstall PLUGIN...
+  $ fe-cli plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -313,17 +355,17 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ qm plugins unlink
-  $ qm plugins remove
+  $ fe-cli plugins unlink
+  $ fe-cli plugins remove
 ```
 
-## `qm plugins update`
+## `fe-cli plugins update`
 
 Update installed plugins.
 
 ```
 USAGE
-  $ qm plugins update [-h] [-v]
+  $ fe-cli plugins update [-h] [-v]
 
 FLAGS
   -h, --help     Show CLI help.
@@ -332,4 +374,29 @@ FLAGS
 DESCRIPTION
   Update installed plugins.
 ```
+
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v3.9.4/src/commands/plugins/update.ts)_
+
+## `fe-cli publish PERSON`
+
+publish project to npm ,
+
+```
+USAGE
+  $ fe-cli publish PERSON [-h]
+
+ARGUMENTS
+  PERSON  Person to say hello to
+
+FLAGS
+  -h, --help  Show CLI help.
+
+DESCRIPTION
+  publish project to npm ,
+
+EXAMPLES
+  fe publish
+```
+
+_See code: [src/commands/publish/index.ts](https://github.com/code/fe-cli/blob/v1.0.2-beta.1/src/commands/publish/index.ts)_
 <!-- commandsstop -->
