@@ -33,8 +33,8 @@ export default class Publish extends Command {
         // 获取当前git分支
         const currentGitName = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
         if (currentGitName !== 'master') {
-            // execSync('npm version prerelease --preid beta').toString();
-            // execSync('npm publish --tag beta');
+            execSync('npm version prerelease --preid beta').toString();
+            execSync('npm publish --tag beta');
             execSync('git add .');
             execSync(`git commit -m "feat: auto upgrade beta version"`);
             execSync(`git push origin ${currentGitName}`);
