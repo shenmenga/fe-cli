@@ -1,6 +1,6 @@
 {
-    "name": "fe-cli",
-    "version": "0.0.1",
+    "name": "qm-fe-cli",
+    "version": "1.0.1",
     "description": "front-end cli",
     "author": "shenmeng@qimao.com",
     "bin": {
@@ -67,7 +67,6 @@
         "lint": "eslint . --ext .ts",
         "postpack": "shx rm -f oclif.manifest.json",
         "posttest": "npm run lint",
-        "prepack": "npm run build && oclif manifest && oclif readme",
         "test": "mocha --forbid-only \"test/**/*.test.ts\"",
         "version": "oclif readme && git add README.md",
         "prettier": "prettier --write 'src/**/*.ts'"
