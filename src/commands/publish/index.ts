@@ -32,7 +32,7 @@ export default class Publish extends Command {
     async load() {
         // 获取当前git分支
         const currentGitName = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
-        if (currentGitName !== 'master') {
+        if (currentGitName !== 'master' && currentGitName !== 'main') {
             execSync('npm version prerelease --preid beta').toString();
             execSync('npm publish --tag beta');
             execSync('git add .');
