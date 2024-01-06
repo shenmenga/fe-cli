@@ -18,7 +18,7 @@ $ npm install -g qm-fe-cli
 $ fe-cli COMMAND
 running command...
 $ fe-cli (--version)
-qm-fe-cli/1.0.2-beta.1 darwin-x64 node-v16.16.0
+qm-fe-cli/2.0.1-beta.3 darwin-x64 node-v16.16.0
 $ fe-cli --help [COMMAND]
 USAGE
   $ fe-cli COMMAND
@@ -67,7 +67,7 @@ EXAMPLES
   qm build --dir=
 ```
 
-_See code: [src/commands/build/index.ts](https://github.com/code/fe-cli/blob/v1.0.2-beta.1/src/commands/build/index.ts)_
+_See code: [src/commands/build/index.ts](https://github.com/code/fe-cli/blob/v2.0.1-beta.3/src/commands/build/index.ts)_
 
 ## `fe-cli build world`
 
@@ -85,7 +85,7 @@ EXAMPLES
   hello world! (./src/commands/hello/world.ts)
 ```
 
-_See code: [src/commands/build/world.ts](https://github.com/code/fe-cli/blob/v1.0.2-beta.1/src/commands/build/world.ts)_
+_See code: [src/commands/build/world.ts](https://github.com/code/fe-cli/blob/v2.0.1-beta.3/src/commands/build/world.ts)_
 
 ## `fe-cli create [NAME]`
 
@@ -108,7 +108,7 @@ EXAMPLES
   fe create project-name
 ```
 
-_See code: [src/commands/create.ts](https://github.com/code/fe-cli/blob/v1.0.2-beta.1/src/commands/create.ts)_
+_See code: [src/commands/create.ts](https://github.com/code/fe-cli/blob/v2.0.1-beta.3/src/commands/create.ts)_
 
 ## `fe-cli help [COMMANDS]`
 
@@ -398,5 +398,5 @@ EXAMPLES
   fe publish
 ```
 
-_See code: [src/commands/publish/index.ts](https://github.com/code/fe-cli/blob/v1.0.2-beta.1/src/commands/publish/index.ts)_
+_See code: [src/commands/publish/index.ts](https://github.com/code/fe-cli/blob/v2.0.1-beta.3/src/commands/publish/index.ts)_
 <!-- commandsstop -->
